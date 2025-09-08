@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { supabase } from '@/lib/supabase';
+import { generateUUID } from '@/lib/uuid';
 import { Workout, DietEntry, ProgressEntry } from '@/types';
 
 interface AppState {
@@ -83,7 +84,7 @@ export const useSupabaseStore = create<AppState>((set, get) => ({
     try {
       const workout = {
         ...workoutData,
-        id: crypto.randomUUID(),
+        id: generateUUID(),
         user_id: get().userId,
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
@@ -184,7 +185,7 @@ export const useSupabaseStore = create<AppState>((set, get) => ({
     try {
       const entry = {
         ...entryData,
-        id: crypto.randomUUID(),
+        id: generateUUID(),
         user_id: get().userId,
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
@@ -284,7 +285,7 @@ export const useSupabaseStore = create<AppState>((set, get) => ({
     try {
       const entry = {
         ...entryData,
-        id: crypto.randomUUID(),
+        id: generateUUID(),
         user_id: get().userId,
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
