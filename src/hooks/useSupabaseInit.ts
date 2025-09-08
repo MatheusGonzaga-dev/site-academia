@@ -1,12 +1,15 @@
 import { useEffect } from 'react';
 import { useSupabaseStore } from '@/store/useSupabaseStore';
+import { useUserId } from './useUserId';
 import { sampleWorkouts, sampleDietEntry, sampleProgressEntries } from '@/data/sampleData';
 
 export function useSupabaseInit() {
+  const userId = useUserId();
   const { 
     workouts, 
     dietEntries, 
     progressEntries,
+    setUserId,
     loadWorkouts,
     loadDietEntries,
     loadProgressEntries,
@@ -16,17 +19,26 @@ export function useSupabaseInit() {
   } = useSupabaseStore();
 
   useEffect(() => {
-    // Carregar dados do Supabase
-    const loadData = async () => {
-      await Promise.all([
-        loadWorkouts(),
-        loadDietEntries(),
-        loadProgressEntries()
-      ]);
-    };
+    // Configurar userId quando disponível
+    if (userId) {
+      setUserId(userId);
+    }
+  }, [userId, setUserId]);
 
-    loadData();
-  }, [loadWorkouts, loadDietEntries, loadProgressEntries]);
+  useEffect(() => {
+    // Carregar dados do Supabase apenas quando userId estiver configurado
+    if (userId) {
+      const loadData = async () => {
+        await Promise.all([
+          loadWorkouts(),
+          loadDietEntries(),
+          loadProgressEntries()
+        ]);
+      };
+
+      loadData();
+    }
+  }, [userId, loadWorkouts, loadDietEntries, loadProgressEntries]);
 
   // Função para popular com dados de exemplo (apenas se estiver vazio)
   const populateSampleData = async () => {
