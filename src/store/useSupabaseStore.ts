@@ -1,13 +1,16 @@
 import { create } from 'zustand';
 import { supabase } from '@/lib/supabase';
 import { generateUUID } from '@/lib/uuid';
-import { Workout, DietEntry, ProgressEntry } from '@/types';
+import { Workout, DietEntry, ProgressEntry, WorkoutTemplate, WeeklyWorkoutPlan } from '@/types';
+import { defaultWeeklyPlan, workoutTemplates } from '@/data/workoutTemplates';
 
 interface AppState {
   // Data
   workouts: Workout[];
   dietEntries: DietEntry[];
   progressEntries: ProgressEntry[];
+  weeklyPlan: WeeklyWorkoutPlan;
+  workoutTemplates: WorkoutTemplate[];
   
   // Loading states
   loading: {
@@ -21,6 +24,10 @@ interface AppState {
   
   // Actions
   setUserId: (userId: string) => void;
+  
+  // Weekly plan actions
+  updateWeeklyPlan: (plan: WeeklyWorkoutPlan) => void;
+  generateTodaysWorkout: () => Workout | null;
   
   // Workout actions
   loadWorkouts: () => Promise<void>;
@@ -45,6 +52,8 @@ export const useSupabaseStore = create<AppState>((set, get) => ({
   workouts: [],
   dietEntries: [],
   progressEntries: [],
+  weeklyPlan: defaultWeeklyPlan,
+  workoutTemplates: workoutTemplates,
   loading: {
     workouts: false,
     dietEntries: false,
@@ -53,6 +62,37 @@ export const useSupabaseStore = create<AppState>((set, get) => ({
   userId: 'demo-user', // ID simples para demo
   
   setUserId: (userId) => set({ userId }),
+  
+  // Weekly plan actions
+  updateWeeklyPlan: (plan) => set({ weeklyPlan: plan }),
+  
+  generateTodaysWorkout: () => {
+    const today = new Date();
+    const dayOfWeek = today.getDay(); // 0 = domingo, 1 = segunda, etc.
+    const plan = get().weeklyPlan;
+    
+    if (!plan.schedule[dayOfWeek]) {
+      return null; // Dia de descanso
+    }
+    
+    const template = plan.schedule[dayOfWeek];
+    const workout: Workout = {
+      id: generateUUID(),
+      name: template.name,
+      date: today,
+      completed: false,
+      exercises: template.exercises.map(exercise => ({
+        ...exercise,
+        sets: [
+          { id: generateUUID(), reps: 12, weight: 0, completed: false },
+          { id: generateUUID(), reps: 10, weight: 0, completed: false },
+          { id: generateUUID(), reps: 8, weight: 0, completed: false }
+        ]
+      }))
+    };
+    
+    return workout;
+  },
   
   // Workout actions
   loadWorkouts: async () => {

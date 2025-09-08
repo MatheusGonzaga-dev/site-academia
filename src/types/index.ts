@@ -29,6 +29,19 @@ export interface WorkoutTemplate {
   description?: string;
   exercises: Omit<Exercise, 'sets'>[];
   category: string;
+  muscleGroup: string;
+  dayOfWeek?: number; // 0 = domingo, 1 = segunda, etc.
+}
+
+export interface WeeklyWorkoutPlan {
+  id: string;
+  name: string;
+  userId: string;
+  schedule: {
+    [key: number]: WorkoutTemplate; // 0-6 para domingo-sábado
+  };
+  active: boolean;
+  createdAt: Date;
 }
 
 export interface Meal {

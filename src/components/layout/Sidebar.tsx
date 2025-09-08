@@ -12,6 +12,7 @@ import { cn } from '@/lib/utils';
 const navigation = [
   { name: 'Dashboard', href: '/', icon: Home },
   { name: 'Treinos', href: '/workouts', icon: Dumbbell },
+  { name: 'Plano Semanal', href: '/weekly-plan', icon: Calendar },
   { name: 'Agenda', href: '/schedule', icon: Calendar },
   { name: 'Dieta', href: '/diet', icon: Utensils },
   { name: 'Progresso', href: '/progress', icon: TrendingUp },

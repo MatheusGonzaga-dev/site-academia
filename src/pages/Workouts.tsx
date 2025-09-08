@@ -21,7 +21,7 @@ import { generateUUID } from '@/lib/uuid';
 import { Workout, Exercise, Set } from '@/types';
 
 export function Workouts() {
-  const { workouts, addWorkout, updateWorkout, deleteWorkout } = useSupabaseStore();
+  const { workouts, addWorkout, updateWorkout, deleteWorkout, generateTodaysWorkout } = useSupabaseStore();
   const [searchTerm, setSearchTerm] = useState('');
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [editingWorkout, setEditingWorkout] = useState<Workout | null>(null);
@@ -43,6 +43,16 @@ export function Workouts() {
     addWorkout(newWorkout);
     setEditingWorkout(newWorkout);
     setShowCreateForm(true);
+  };
+
+  const createTodaysWorkout = async () => {
+    const workout = generateTodaysWorkout();
+    if (workout) {
+      await addWorkout(workout);
+      alert(`Treino de hoje (${workout.name}) criado com sucesso!`);
+    } else {
+      alert('Hoje é dia de descanso no seu plano semanal! 😊');
+    }
   };
 
   const toggleWorkoutCompletion = (workout: Workout) => {
@@ -124,10 +134,16 @@ export function Workouts() {
             Gerencie seus treinos e acompanhe seu progresso
           </p>
         </div>
-        <Button onClick={createNewWorkout}>
-          <Plus className="mr-2 h-4 w-4" />
-          Novo Treino
-        </Button>
+        <div className="flex space-x-2">
+          <Button onClick={createTodaysWorkout} variant="default">
+            <Calendar className="mr-2 h-4 w-4" />
+            Treino de Hoje
+          </Button>
+          <Button onClick={createNewWorkout} variant="outline">
+            <Plus className="mr-2 h-4 w-4" />
+            Novo Treino
+          </Button>
+        </div>
       </div>
 
       {/* Search */}
