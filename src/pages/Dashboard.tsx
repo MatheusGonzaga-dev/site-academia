@@ -16,8 +16,15 @@ import { format, isToday, isThisWeek } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
 export function Dashboard() {
-  const { workouts, dietEntries, progressEntries } = useSupabaseStore();
+  const { workouts, dietEntries, progressEntries, loadWorkouts, loadDietEntries, loadProgressEntries } = useSupabaseStore();
   const [greeting, setGreeting] = useState('');
+
+  // Carregar dados quando o dashboard for aberto
+  useEffect(() => {
+    loadWorkouts();
+    loadDietEntries();
+    loadProgressEntries();
+  }, [loadWorkouts, loadDietEntries, loadProgressEntries]);
 
   useEffect(() => {
     const hour = new Date().getHours();

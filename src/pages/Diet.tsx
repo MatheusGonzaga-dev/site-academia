@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -21,10 +21,15 @@ import { generateUUID } from '@/lib/uuid';
 import { DietEntry, Meal } from '@/types';
 
 export function Diet() {
-  const { dietEntries, addDietEntry, updateDietEntry } = useSupabaseStore();
+  const { dietEntries, addDietEntry, updateDietEntry, loadDietEntries } = useSupabaseStore();
   const [selectedDate, setSelectedDate] = useState(format(new Date(), 'yyyy-MM-dd'));
   const [showAddMeal, setShowAddMeal] = useState(false);
   const [selectedMealType, setSelectedMealType] = useState<'breakfast' | 'lunch' | 'dinner' | 'snacks'>('breakfast');
+
+  // Carregar dados da dieta quando a página for aberta
+  useEffect(() => {
+    loadDietEntries();
+  }, [loadDietEntries]);
 
   const selectedDietEntry = dietEntries.find(entry => 
     format(entry.date, 'yyyy-MM-dd') === selectedDate

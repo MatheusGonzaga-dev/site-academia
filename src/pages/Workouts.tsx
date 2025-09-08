@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -22,10 +22,15 @@ import { generateUUID } from '@/lib/uuid';
 import { Workout, Exercise, Set } from '@/types';
 
 export function Workouts() {
-  const { workouts, addWorkout, updateWorkout, deleteWorkout, generateTodaysWorkout } = useSupabaseStore();
+  const { workouts, addWorkout, updateWorkout, deleteWorkout, generateTodaysWorkout, loadWorkouts } = useSupabaseStore();
   const [searchTerm, setSearchTerm] = useState('');
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [editingWorkout, setEditingWorkout] = useState<Workout | null>(null);
+
+  // Carregar treinos quando a página for aberta
+  useEffect(() => {
+    loadWorkouts();
+  }, [loadWorkouts]);
 
   const filteredWorkouts = workouts.filter(workout =>
     workout.name.toLowerCase().includes(searchTerm.toLowerCase()) ||

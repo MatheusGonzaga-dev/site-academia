@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -20,8 +20,13 @@ import { generateUUID } from '@/lib/uuid';
 import { ProgressEntry } from '@/types';
 
 export function Progress() {
-  const { progressEntries, addProgressEntry, updateProgressEntry } = useSupabaseStore();
+  const { progressEntries, addProgressEntry, updateProgressEntry, loadProgressEntries } = useSupabaseStore();
   const [showAddEntry, setShowAddEntry] = useState(false);
+
+  // Carregar dados de progresso quando a página for aberta
+  useEffect(() => {
+    loadProgressEntries();
+  }, [loadProgressEntries]);
 
   const sortedEntries = progressEntries.sort((a, b) => b.date.getTime() - a.date.getTime());
   const latestEntry = sortedEntries[0];
