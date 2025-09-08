@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 export function useUserId() {
-  const [userId, setUserId] = useState<string>('');
+  const [userId, setUserId] = useState<string>('demo-user');
 
   useEffect(() => {
     // Verificar se já existe um userId salvo
@@ -10,8 +10,8 @@ export function useUserId() {
     if (savedUserId) {
       setUserId(savedUserId);
     } else {
-      // Gerar um novo UUID e salvar
-      const newUserId = crypto.randomUUID();
+      // Usar um ID simples para demo
+      const newUserId = 'demo-user';
       localStorage.setItem('academia-user-id', newUserId);
       setUserId(newUserId);
     }

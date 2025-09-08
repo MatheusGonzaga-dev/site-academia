@@ -49,7 +49,7 @@ export const useSupabaseStore = create<AppState>((set, get) => ({
     dietEntries: false,
     progressEntries: false,
   },
-  userId: '', // Será definido pelo hook useUserId
+  userId: 'demo-user', // ID simples para demo
   
   setUserId: (userId) => set({ userId }),
   
