@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { useAppStore } from '@/store/useAppStore';
+import { useSupabaseStore } from '@/store/useSupabaseStore';
 import { 
   Plus, 
   Search, 
@@ -20,7 +20,7 @@ import { ptBR } from 'date-fns/locale';
 import { Workout, Exercise, Set } from '@/types';
 
 export function Workouts() {
-  const { workouts, addWorkout, updateWorkout, deleteWorkout } = useAppStore();
+  const { workouts, addWorkout, updateWorkout, deleteWorkout } = useSupabaseStore();
   const [searchTerm, setSearchTerm] = useState('');
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [editingWorkout, setEditingWorkout] = useState<Workout | null>(null);

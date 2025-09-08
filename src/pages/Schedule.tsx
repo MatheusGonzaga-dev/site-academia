@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { useAppStore } from '@/store/useAppStore';
+import { useSupabaseStore } from '@/store/useSupabaseStore';
 import { 
   Calendar, 
   ChevronLeft, 
@@ -24,7 +24,7 @@ import {
 import { ptBR } from 'date-fns/locale';
 
 export function Schedule() {
-  const { workouts } = useAppStore();
+  const { workouts } = useSupabaseStore();
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 

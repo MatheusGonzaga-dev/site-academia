@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { useAppStore } from '@/store/useAppStore';
+import { useSupabaseStore } from '@/store/useSupabaseStore';
 import { 
   Plus, 
   Utensils, 
@@ -20,7 +20,7 @@ import { ptBR } from 'date-fns/locale';
 import { DietEntry, Meal } from '@/types';
 
 export function Diet() {
-  const { dietEntries, addDietEntry, updateDietEntry } = useAppStore();
+  const { dietEntries, addDietEntry, updateDietEntry } = useSupabaseStore();
   const [selectedDate, setSelectedDate] = useState(format(new Date(), 'yyyy-MM-dd'));
   const [showAddMeal, setShowAddMeal] = useState(false);
   const [selectedMealType, setSelectedMealType] = useState<'breakfast' | 'lunch' | 'dinner' | 'snacks'>('breakfast');

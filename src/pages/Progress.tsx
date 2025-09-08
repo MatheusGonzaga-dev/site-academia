@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { useAppStore } from '@/store/useAppStore';
+import { useSupabaseStore } from '@/store/useSupabaseStore';
 import { 
   Plus, 
   TrendingUp, 
@@ -19,7 +19,7 @@ import { ptBR } from 'date-fns/locale';
 import { ProgressEntry } from '@/types';
 
 export function Progress() {
-  const { progressEntries, addProgressEntry, updateProgressEntry } = useAppStore();
+  const { progressEntries, addProgressEntry, updateProgressEntry } = useSupabaseStore();
   const [showAddEntry, setShowAddEntry] = useState(false);
 
   const sortedEntries = progressEntries.sort((a, b) => b.date.getTime() - a.date.getTime());
