@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { format, isToday } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import { generateUUID } from '@/lib/uuid';
 import { DietEntry, Meal } from '@/types';
 
 export function Diet() {
@@ -32,7 +33,7 @@ export function Diet() {
   const createTodayEntry = () => {
     if (!selectedDietEntry) {
       const newEntry: DietEntry = {
-        id: Date.now().toString(),
+        id: generateUUID(),
         date: new Date(selectedDate),
         meals: {
           breakfast: [],
@@ -295,7 +296,7 @@ export function Diet() {
                 const formData = new FormData(e.currentTarget);
                 
                 const newMeal: Meal = {
-                  id: Date.now().toString(),
+                  id: generateUUID(),
                   name: formData.get('name') as string,
                   calories: parseFloat(formData.get('calories') as string) || 0,
                   protein: parseFloat(formData.get('protein') as string) || 0,

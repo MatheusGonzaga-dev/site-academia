@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import { generateUUID } from '@/lib/uuid';
 import { Workout, Exercise, Set } from '@/types';
 
 export function Workouts() {
@@ -32,7 +33,7 @@ export function Workouts() {
 
   const createNewWorkout = () => {
     const newWorkout: Workout = {
-      id: Date.now().toString(),
+      id: generateUUID(),
       name: 'Novo Treino',
       date: new Date(),
       exercises: [],
@@ -53,11 +54,11 @@ export function Workouts() {
     if (!workout) return;
 
     const newExercise: Exercise = {
-      id: Date.now().toString(),
+      id: generateUUID(),
       name: 'Novo Exercício',
       targetMuscle: 'Peito',
       sets: [{
-        id: Date.now().toString(),
+        id: generateUUID(),
         reps: 12,
         weight: 0,
         completed: false
@@ -88,7 +89,7 @@ export function Workouts() {
     if (!exercise) return;
 
     const newSet: Set = {
-      id: Date.now().toString(),
+      id: generateUUID(),
       reps: 12,
       weight: 0,
       completed: false

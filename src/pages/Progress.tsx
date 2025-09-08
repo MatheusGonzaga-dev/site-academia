@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import { generateUUID } from '@/lib/uuid';
 import { ProgressEntry } from '@/types';
 
 export function Progress() {
@@ -39,7 +40,7 @@ export function Progress() {
 
   const addNewEntry = (formData: FormData) => {
     const newEntry: ProgressEntry = {
-      id: Date.now().toString(),
+      id: generateUUID(),
       date: new Date(formData.get('date') as string),
       weight: parseFloat(formData.get('weight') as string) || undefined,
       bodyFat: parseFloat(formData.get('bodyFat') as string) || undefined,
