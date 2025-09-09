@@ -9,7 +9,6 @@ export interface Exercise {
 export interface Set {
   id: string;
   reps: number;
-  weight: number;
   completed: boolean;
 }
 
@@ -21,6 +20,7 @@ export interface Workout {
   duration?: number; // in minutes
   notes?: string;
   completed: boolean;
+  fromWeeklyPlan?: boolean; // identifica se foi criado pelo plano semanal
 }
 
 export interface WorkoutTemplate {
@@ -29,7 +29,7 @@ export interface WorkoutTemplate {
   description?: string;
   exercises: Omit<Exercise, 'sets'>[];
   category: string;
-  muscleGroup: string;
+  muscleGroup: string | string[]; // Suporte para múltiplos grupos musculares
   dayOfWeek?: number; // 0 = domingo, 1 = segunda, etc.
 }
 

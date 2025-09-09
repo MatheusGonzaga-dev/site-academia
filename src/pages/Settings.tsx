@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { SupabaseSetup } from '@/components/SupabaseSetup';
+import { resetLocalData } from '@/utils/resetData';
 import { 
   Settings as SettingsIcon, 
   User, 
@@ -207,6 +208,19 @@ export function Settings() {
 
             <div className="space-y-2">
               <p className="text-sm font-medium text-destructive">Zona de Perigo</p>
+              
+              <Button 
+                variant="outline" 
+                onClick={resetLocalData}
+                className="w-full justify-start"
+              >
+                <Trash2 className="mr-2 h-4 w-4" />
+                Limpar Dados Locais (localStorage)
+              </Button>
+              <p className="text-xs text-muted-foreground">
+                Remove dados duplicados do navegador. Mantém dados do Supabase.
+              </p>
+              
               <Button 
                 variant="destructive" 
                 onClick={handleClearData}

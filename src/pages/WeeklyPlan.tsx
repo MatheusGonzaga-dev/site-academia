@@ -3,7 +3,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useSupabaseStore } from '@/store/useSupabaseStore';
-import { Calendar, Settings, Plus, Dumbbell } from 'lucide-react';
+import { WeeklyPlanEditor } from '@/components/WeeklyPlanEditor';
+import { Calendar, Plus, Dumbbell, Edit } from 'lucide-react';
 import { WeeklyWorkoutPlan, WorkoutTemplate } from '@/types';
 
 const weekDays = [
@@ -17,37 +18,85 @@ const weekDays = [
 ];
 
 export function WeeklyPlan() {
-  const { weeklyPlan, workoutTemplates, updateWeeklyPlan, generateTodaysWorkout, addWorkout } = useSupabaseStore();
-  const [editingDay, setEditingDay] = useState<number | null>(null);
+  const { 
+    weeklyPlan, 
+    workoutTemplates, 
+    updateWeeklyPlan, 
+    updateWeeklyPlanDay, 
+    generateTodaysWorkout, 
+    addWorkout
+  } = useSupabaseStore();
+  const [editingDay, setEditingDay] = useState<{ dayOfWeek: number; dayName: string; template: WorkoutTemplate | null } | null>(null);
   const [selectedTemplate, setSelectedTemplate] = useState<string>('');
 
-  const assignTemplateToDay = (dayId: number, templateId: string) => {
-    const template = workoutTemplates.find(t => t.id === templateId);
-    if (!template) return;
+  const assignTemplateToDay = async (dayId: number, templateId: string) => {
+    try {
+      const template = workoutTemplates.find(t => t.id === templateId);
+      if (!template) return;
 
-    const newPlan: WeeklyWorkoutPlan = {
-      ...weeklyPlan,
-      schedule: {
-        ...weeklyPlan.schedule,
-        [dayId]: template
-      }
-    };
-
-    updateWeeklyPlan(newPlan);
-    setEditingDay(null);
-    setSelectedTemplate('');
+      // Usar a função updateWeeklyPlanDay que já lida com o salvamento
+      await updateWeeklyPlanDay(dayId, template);
+      setEditingDay(null);
+      setSelectedTemplate('');
+      
+      // Notificar sucesso
+      const dayName = weekDays.find(d => d.id === dayId)?.name || 'Dia';
+      alert(`✅ ${dayName} atualizado com ${template.name}!`);
+    } catch (error) {
+      console.error('❌ Erro ao atribuir template:', error);
+      alert('❌ Erro ao salvar plano semanal. Tente novamente.');
+    }
   };
 
-  const removeWorkoutFromDay = (dayId: number) => {
-    const newSchedule = { ...weeklyPlan.schedule };
-    delete newSchedule[dayId];
+  const removeWorkoutFromDay = async (dayId: number) => {
+    try {
+      // Usar a função updateWeeklyPlanDay para remover (passa null)
+      await updateWeeklyPlanDay(dayId, null);
+      
+      // Notificar sucesso
+      const dayName = weekDays.find(d => d.id === dayId)?.name || 'Dia';
+      alert(`✅ Treino removido de ${dayName}!`);
+    } catch (error) {
+      console.error('❌ Erro ao remover treino:', error);
+      alert('❌ Erro ao salvar alteração. Tente novamente.');
+    }
+  };
 
-    const newPlan: WeeklyWorkoutPlan = {
-      ...weeklyPlan,
-      schedule: newSchedule
-    };
+  const handleEditDay = (dayOfWeek: number, dayName: string) => {
+    const template = weeklyPlan.schedule[dayOfWeek] || null;
+    setEditingDay({ dayOfWeek, dayName, template });
+  };
 
-    updateWeeklyPlan(newPlan);
+  // Função para notificar a página de treinos para gerar treinos
+  const triggerWorkoutGeneration = () => {
+    console.log('🎯 Disparando geração de treinos...');
+    window.dispatchEvent(new CustomEvent('generateWeeklyWorkouts'));
+  };
+
+  const handleSaveDay = async (dayOfWeek: number, template: WorkoutTemplate | null) => {
+    try {
+      // Aguardar o salvamento no banco
+      await updateWeeklyPlanDay(dayOfWeek, template);
+      setEditingDay(null);
+      
+      // Mostrar feedback visual
+      console.log(`Dia ${dayOfWeek} atualizado:`, template ? template.name : 'Descanso');
+      
+      // Notificar sucesso
+      const dayName = weekDays.find(d => d.id === dayOfWeek)?.name || 'Dia';
+      alert(`✅ ${dayName} atualizado com sucesso!`);
+      
+      // Disparar geração de treinos na página de treinos
+      console.log('🎯 Disparando geração de treinos após atualização do plano...');
+      triggerWorkoutGeneration();
+    } catch (error) {
+      console.error('❌ Erro ao salvar dia:', error);
+      alert('❌ Erro ao salvar plano semanal. Verifique sua conexão com a internet e tente novamente.');
+    }
+  };
+
+  const handleCloseEditor = () => {
+    setEditingDay(null);
   };
 
   const generateTodayWorkout = async () => {
@@ -94,7 +143,7 @@ export function WeeklyPlan() {
             {weekDays.map(day => {
               const workout = weeklyPlan.schedule[day.id];
               const isToday = getTodayDayId() === day.id;
-              const isEditing = editingDay === day.id;
+              const isEditing = editingDay?.dayOfWeek === day.id;
 
               return (
                 <Card key={day.id} className={`${isToday ? 'border-primary' : ''}`}>
@@ -107,9 +156,9 @@ export function WeeklyPlan() {
                       <Button
                         variant="ghost"
                         size="icon"
-                        onClick={() => setEditingDay(isEditing ? null : day.id)}
+                        onClick={() => handleEditDay(day.id, day.name)}
                       >
-                        <Settings className="h-4 w-4" />
+                        <Edit className="h-4 w-4" />
                       </Button>
                     </div>
                   </CardHeader>
@@ -160,7 +209,22 @@ export function WeeklyPlan() {
                           <Dumbbell className="h-4 w-4 text-primary" />
                           <span className="font-medium">{workout.name}</span>
                         </div>
-                        <Badge variant="secondary">{workout.muscleGroup}</Badge>
+                        {workout.description && (
+                          <p className="text-sm text-gray-600 overflow-hidden" style={{
+                            display: '-webkit-box',
+                            WebkitLineClamp: 3,
+                            WebkitBoxOrient: 'vertical',
+                            wordBreak: 'break-word',
+                            hyphens: 'auto'
+                          }}>
+                            {workout.description}
+                          </p>
+                        )}
+                        <Badge variant="secondary">
+                          {Array.isArray(workout.muscleGroup) 
+                            ? workout.muscleGroup.join(' + ') 
+                            : workout.muscleGroup}
+                        </Badge>
                         <p className="text-sm text-muted-foreground">
                           {workout.exercises.length} exercícios
                         </p>
@@ -176,7 +240,7 @@ export function WeeklyPlan() {
                           size="sm"
                           variant="outline"
                           className="mt-2"
-                          onClick={() => setEditingDay(day.id)}
+                          onClick={() => handleEditDay(day.id, day.name)}
                         >
                           <Plus className="mr-2 h-3 w-3" />
                           Adicionar Treino
@@ -191,43 +255,17 @@ export function WeeklyPlan() {
         </CardContent>
       </Card>
 
-      {/* Available Templates */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Templates Disponíveis</CardTitle>
-          <CardDescription>
-            Treinos pré-configurados que você pode usar
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {workoutTemplates.map(template => (
-              <Card key={template.id} className="cursor-pointer hover:shadow-md transition-shadow">
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-lg">{template.name}</CardTitle>
-                  <Badge variant="outline">{template.muscleGroup}</Badge>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground mb-2">
-                    {template.description}
-                  </p>
-                  <p className="text-sm">
-                    <span className="font-medium">{template.exercises.length} exercícios:</span>
-                  </p>
-                  <ul className="text-xs text-muted-foreground mt-1 space-y-1">
-                    {template.exercises.slice(0, 4).map(exercise => (
-                      <li key={exercise.id}>• {exercise.name}</li>
-                    ))}
-                    {template.exercises.length > 4 && (
-                      <li>• +{template.exercises.length - 4} mais exercícios</li>
-                    )}
-                  </ul>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+
+      {/* Modal de Edição do Plano Semanal */}
+      {editingDay && (
+        <WeeklyPlanEditor
+          dayOfWeek={editingDay.dayOfWeek}
+          dayName={editingDay.dayName}
+          template={editingDay.template}
+          onSave={handleSaveDay}
+          onClose={handleCloseEditor}
+        />
+      )}
     </div>
   );
 }

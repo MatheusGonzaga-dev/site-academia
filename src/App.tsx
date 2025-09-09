@@ -10,8 +10,9 @@ import { Settings } from '@/pages/Settings';
 import { useSupabaseInit } from '@/hooks/useSupabaseInit';
 
 function App() {
-  // Initialize Supabase data
-  const { populateSampleData } = useSupabaseInit();
+  // Initialize Supabase data (temporariamente desabilitado para evitar duplicação)
+  // const { populateSampleData } = useSupabaseInit();
+  useSupabaseInit();
 
   return (
     <Router>

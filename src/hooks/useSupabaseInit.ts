@@ -10,9 +10,7 @@ export function useSupabaseInit() {
     dietEntries, 
     progressEntries,
     setUserId,
-    loadWorkouts,
-    loadDietEntries,
-    loadProgressEntries,
+    loadWeeklyPlan,
     addWorkout,
     addDietEntry,
     addProgressEntry
@@ -22,23 +20,12 @@ export function useSupabaseInit() {
     // Configurar userId quando disponível
     if (userId) {
       setUserId(userId);
+      // Carregar plano semanal quando userId estiver disponível
+      loadWeeklyPlan();
     }
-  }, [userId, setUserId]);
+  }, [userId, setUserId, loadWeeklyPlan]);
 
-  useEffect(() => {
-    // Carregar dados do Supabase apenas quando userId estiver configurado
-    if (userId) {
-      const loadData = async () => {
-        await Promise.all([
-          loadWorkouts(),
-          loadDietEntries(),
-          loadProgressEntries()
-        ]);
-      };
-
-      loadData();
-    }
-  }, [userId, loadWorkouts, loadDietEntries, loadProgressEntries]);
+  // Remover carregamento automático de dados - será feito em cada página
 
   // Função para popular com dados de exemplo (apenas se estiver vazio)
   const populateSampleData = async () => {

@@ -12,9 +12,9 @@ export const sampleWorkouts: Workout[] = [
         name: 'Supino Reto',
         targetMuscle: 'Peito',
         sets: [
-          { id: 'set-1', reps: 12, weight: 60, completed: false },
-          { id: 'set-2', reps: 10, weight: 65, completed: false },
-          { id: 'set-3', reps: 8, weight: 70, completed: false }
+          { id: 'set-1', reps: 12, completed: false },
+          { id: 'set-2', reps: 10, completed: false },
+          { id: 'set-3', reps: 8, completed: false }
         ]
       },
       {
@@ -22,9 +22,9 @@ export const sampleWorkouts: Workout[] = [
         name: 'Supino Inclinado',
         targetMuscle: 'Peito',
         sets: [
-          { id: 'set-4', reps: 12, weight: 50, completed: false },
-          { id: 'set-5', reps: 10, weight: 55, completed: false },
-          { id: 'set-6', reps: 8, weight: 60, completed: false }
+          { id: 'set-4', reps: 12, completed: false },
+          { id: 'set-5', reps: 10, completed: false },
+          { id: 'set-6', reps: 8, completed: false }
         ]
       },
       {
@@ -32,9 +32,9 @@ export const sampleWorkouts: Workout[] = [
         name: 'Tríceps Pulley',
         targetMuscle: 'Tríceps',
         sets: [
-          { id: 'set-7', reps: 15, weight: 30, completed: false },
-          { id: 'set-8', reps: 12, weight: 35, completed: false },
-          { id: 'set-9', reps: 10, weight: 40, completed: false }
+          { id: 'set-7', reps: 15, completed: false },
+          { id: 'set-8', reps: 12, completed: false },
+          { id: 'set-9', reps: 10, completed: false }
         ]
       }
     ],
@@ -51,9 +51,9 @@ export const sampleWorkouts: Workout[] = [
         name: 'Puxada Frontal',
         targetMuscle: 'Costas',
         sets: [
-          { id: 'set-10', reps: 12, weight: 50, completed: true },
-          { id: 'set-11', reps: 10, weight: 55, completed: true },
-          { id: 'set-12', reps: 8, weight: 60, completed: true }
+          { id: 'set-10', reps: 12, completed: true },
+          { id: 'set-11', reps: 10, completed: true },
+          { id: 'set-12', reps: 8, completed: true }
         ]
       },
       {
@@ -61,8 +61,8 @@ export const sampleWorkouts: Workout[] = [
         name: 'Remada Baixa',
         targetMuscle: 'Costas',
         sets: [
-          { id: 'set-13', reps: 12, weight: 45, completed: true },
-          { id: 'set-14', reps: 10, weight: 50, completed: true }
+          { id: 'set-13', reps: 12, completed: true },
+          { id: 'set-14', reps: 10, completed: true }
         ]
       }
     ],

@@ -5,204 +5,236 @@ export const muscleGroups = {
   PEITO: 'Peito',
   COSTAS: 'Costas',
   OMBRO: 'Ombro',
-  BRACO: 'Braço',
+  BICEPS: 'Bíceps',
+  TRICEPS: 'Tríceps',
+  ANTEBRACO: 'Antebraço',
+  GLUTEO: 'Glúteo',
+  PANTURRILHA: 'Panturrilha',
+  ABDOMEN: 'Abdômen',
+  TRAPEZIO: 'Trapézio',
   CARDIO: 'Cardio',
-  CORPO_TODO: 'Corpo Todo'
+  FUNCIONAL: 'Funcional',
+  OUTROS: 'Outros'
 };
 
 export const workoutTemplates: WorkoutTemplate[] = [
   {
-    id: 'template-perna',
+    id: '550e8400-e29b-41d4-a716-446655440001', // UUID válido
     name: 'Treino de Perna',
     description: 'Foco em quadríceps, glúteos e panturrilhas',
-    muscleGroup: muscleGroups.PERNA,
+    muscleGroup: [muscleGroups.PERNA, muscleGroups.GLUTEO, muscleGroups.PANTURRILHA],
     category: 'Força',
     exercises: [
       {
         id: 'agachamento',
         name: 'Agachamento Livre',
         targetMuscle: 'Quadríceps/Glúteos',
-        sets: []
       },
       {
         id: 'leg-press',
         name: 'Leg Press',
         targetMuscle: 'Quadríceps/Glúteos',
-        sets: []
       },
       {
         id: 'cadeira-extensora',
         name: 'Cadeira Extensora',
         targetMuscle: 'Quadríceps',
-        sets: []
       },
       {
         id: 'mesa-flexora',
         name: 'Mesa Flexora',
         targetMuscle: 'Posterior',
-        sets: []
       },
       {
         id: 'panturrilha',
         name: 'Panturrilha em Pé',
         targetMuscle: 'Panturrilhas',
-        sets: []
       }
     ]
   },
   {
-    id: 'template-peito',
-    name: 'Treino de Peito',
+    id: '550e8400-e29b-41d4-a716-446655440002', // UUID válido
+    name: 'Treino de Peito + Tríceps',
     description: 'Foco em peitoral e tríceps',
-    muscleGroup: muscleGroups.PEITO,
+    muscleGroup: [muscleGroups.PEITO, muscleGroups.TRICEPS],
     category: 'Força',
     exercises: [
       {
         id: 'supino-reto',
         name: 'Supino Reto',
         targetMuscle: 'Peitoral',
-        sets: []
       },
       {
         id: 'supino-inclinado',
         name: 'Supino Inclinado',
         targetMuscle: 'Peitoral Superior',
-        sets: []
       },
       {
         id: 'crucifixo',
         name: 'Crucifixo',
         targetMuscle: 'Peitoral',
-        sets: []
       },
       {
         id: 'triceps-pulley',
         name: 'Tríceps Pulley',
         targetMuscle: 'Tríceps',
-        sets: []
       },
       {
         id: 'triceps-testa',
         name: 'Tríceps Testa',
         targetMuscle: 'Tríceps',
-        sets: []
       }
     ]
   },
   {
-    id: 'template-costas',
-    name: 'Treino de Costas',
+    id: '550e8400-e29b-41d4-a716-446655440003', // UUID válido
+    name: 'Treino de Costas + Bíceps',
     description: 'Foco em latíssimo e bíceps',
-    muscleGroup: muscleGroups.COSTAS,
+    muscleGroup: [muscleGroups.COSTAS, muscleGroups.BICEPS],
     category: 'Força',
     exercises: [
       {
         id: 'puxada-frontal',
         name: 'Puxada Frontal',
         targetMuscle: 'Latíssimo',
-        sets: []
       },
       {
         id: 'remada-baixa',
         name: 'Remada Baixa',
         targetMuscle: 'Romboides/Latíssimo',
-        sets: []
       },
       {
         id: 'remada-curvada',
         name: 'Remada Curvada',
         targetMuscle: 'Latíssimo',
-        sets: []
       },
       {
         id: 'rosca-direta',
         name: 'Rosca Direta',
         targetMuscle: 'Bíceps',
-        sets: []
       },
       {
         id: 'rosca-martelo',
         name: 'Rosca Martelo',
         targetMuscle: 'Bíceps/Antebraço',
-        sets: []
       }
     ]
   },
   {
-    id: 'template-ombro',
+    id: '550e8400-e29b-41d4-a716-446655440004', // UUID válido
     name: 'Treino de Ombro',
-    description: 'Foco em deltoides',
-    muscleGroup: muscleGroups.OMBRO,
+    description: 'Foco em deltoides e trapézio',
+    muscleGroup: [muscleGroups.OMBRO, muscleGroups.TRAPEZIO],
     category: 'Força',
     exercises: [
       {
         id: 'desenvolvimento',
         name: 'Desenvolvimento',
         targetMuscle: 'Deltoide Anterior',
-        sets: []
       },
       {
         id: 'elevacao-lateral',
         name: 'Elevação Lateral',
         targetMuscle: 'Deltoide Medial',
-        sets: []
       },
       {
         id: 'elevacao-posterior',
         name: 'Elevação Posterior',
         targetMuscle: 'Deltoide Posterior',
-        sets: []
       },
       {
         id: 'encolhimento',
         name: 'Encolhimento',
         targetMuscle: 'Trapézio',
-        sets: []
       }
     ]
   },
   {
-    id: 'template-cardio',
+    id: '550e8400-e29b-41d4-a716-446655440005', // UUID válido
     name: 'Treino Cardio',
     description: 'Exercícios cardiovasculares',
-    muscleGroup: muscleGroups.CARDIO,
+    muscleGroup: [muscleGroups.CARDIO],
     category: 'Cardio',
     exercises: [
       {
         id: 'esteira',
         name: 'Esteira',
         targetMuscle: 'Cardiovascular',
-        sets: []
       },
       {
         id: 'bicicleta',
         name: 'Bicicleta Ergométrica',
         targetMuscle: 'Cardiovascular',
-        sets: []
       },
       {
         id: 'eliptico',
         name: 'Elíptico',
         targetMuscle: 'Cardiovascular',
-        sets: []
+      }
+    ]
+  },
+  {
+    id: '550e8400-e29b-41d4-a716-446655440006', // UUID válido
+    name: 'Treino de Braço Completo',
+    description: 'Foco em bíceps, tríceps e antebraço',
+    muscleGroup: [muscleGroups.BICEPS, muscleGroups.TRICEPS, muscleGroups.ANTEBRACO],
+    category: 'Força',
+    exercises: [
+      {
+        id: 'rosca-direta',
+        name: 'Rosca Direta',
+        targetMuscle: 'Bíceps',
+      },
+      {
+        id: 'triceps-pulley',
+        name: 'Tríceps Pulley',
+        targetMuscle: 'Tríceps',
+      },
+      {
+        id: 'rosca-martelo',
+        name: 'Rosca Martelo',
+        targetMuscle: 'Bíceps/Antebraço',
+      },
+      {
+        id: 'triceps-testa',
+        name: 'Tríceps Testa',
+        targetMuscle: 'Tríceps',
+      }
+    ]
+  },
+  {
+    id: '550e8400-e29b-41d4-a716-446655440007', // UUID válido
+    name: 'Treino Funcional',
+    description: 'Exercícios funcionais e core',
+    muscleGroup: [muscleGroups.FUNCIONAL, muscleGroups.ABDOMEN],
+    category: 'Funcional',
+    exercises: [
+      {
+        id: 'burpee',
+        name: 'Burpee',
+        targetMuscle: 'Corpo Todo',
+      },
+      {
+        id: 'mountain-climber',
+        name: 'Mountain Climber',
+        targetMuscle: 'Core/Cardio',
+      },
+      {
+        id: 'plank',
+        name: 'Prancha',
+        targetMuscle: 'Core',
       }
     ]
   }
 ];
 
 export const defaultWeeklyPlan: WeeklyWorkoutPlan = {
-  id: 'default-plan',
-  name: 'Plano Semanal Padrão',
+  id: '550e8400-e29b-41d4-a716-446655440000', // UUID válido para o plano padrão
+  name: 'Meu Plano Semanal',
   userId: 'demo-user',
   active: true,
   createdAt: new Date(),
   schedule: {
-    1: workoutTemplates[0], // Segunda - Perna
-    2: workoutTemplates[1], // Terça - Peito
-    3: workoutTemplates[2], // Quarta - Costas
-    4: workoutTemplates[0], // Quinta - Perna
-    5: workoutTemplates[3], // Sexta - Ombro
-    6: workoutTemplates[4], // Sábado - Cardio
-    // Domingo - Descanso
+    // Plano vazio - configure cada dia como quiser
   }
 };

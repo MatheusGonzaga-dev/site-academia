@@ -20,6 +20,7 @@ export interface Database {
           duration: number | null
           notes: string | null
           completed: boolean
+          from_weekly_plan: boolean
           created_at: string
           updated_at: string
         }
@@ -32,6 +33,7 @@ export interface Database {
           duration?: number | null
           notes?: string | null
           completed?: boolean
+          from_weekly_plan?: boolean
           created_at?: string
           updated_at?: string
         }
@@ -44,6 +46,7 @@ export interface Database {
           duration?: number | null
           notes?: string | null
           completed?: boolean
+          from_weekly_plan?: boolean
           created_at?: string
           updated_at?: string
         }
@@ -111,6 +114,35 @@ export interface Database {
           body_fat?: number | null
           measurements?: any
           notes?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      weekly_plans: {
+        Row: {
+          id: string
+          user_id: string
+          name: string
+          schedule: any // JSON
+          active: boolean
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          name: string
+          schedule: any
+          active?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          name?: string
+          schedule?: any
+          active?: boolean
           created_at?: string
           updated_at?: string
         }
