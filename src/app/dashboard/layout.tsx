@@ -35,7 +35,7 @@ export default function DashboardLayout({
       <DashboardSidebar />
       <div className="lg:pl-64">
         <DashboardHeader />
-        <main className="py-6 pb-20 lg:pb-6">
+        <main className="py-6 pb-24 lg:pb-6">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             {children}
           </div>
