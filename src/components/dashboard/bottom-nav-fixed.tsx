@@ -10,7 +10,6 @@ import {
   User
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import '../../../styles/bottom-nav.css'
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: Home },
