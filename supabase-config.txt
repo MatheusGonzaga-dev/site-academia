@@ -1,4 +1,0 @@
-# Copie este conteúdo para um arquivo chamado .env.local na raiz do projeto
-
-VITE_SUPABASE_URL=https://rzojanygdumtbafpnhxy.supabase.co
-VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ6b2phbnlnZHVtdGJhZnBuaHh5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTczNDA2NDEsImV4cCI6MjA3MjkxNjY0MX0.ZQpgUH6UZ-a-hsLAbf_v00MkXhRDmmTtIxeuUl-_1qM

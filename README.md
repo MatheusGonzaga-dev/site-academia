@@ -1,149 +1,225 @@
-# 💪 Minha Academia - Personal Fitness Tracker
+# 🏋️ Academia Fitness - Treino e Dieta
 
-Um aplicativo moderno e completo para controle de treinos, dieta e progresso físico, construído com as melhores tecnologias web.
+Uma aplicação web moderna e responsiva para gerenciar treinos e dieta, construída com Next.js 14, TypeScript, Tailwind CSS e Supabase.
+
+## ✨ Características
+
+- 🎯 **Interface Moderna**: Design responsivo com Tailwind CSS
+- 📱 **PWA**: Funciona offline e pode ser instalado no celular
+- 🔐 **Autenticação Segura**: Login com email/senha e Google OAuth
+- 💪 **Gestão de Treinos**: Crie e organize seus treinos por dias da semana
+- 🍎 **Controle de Dieta**: Monitore refeições e macronutrientes
+- 📊 **Acompanhamento**: Visualize seu progresso com gráficos
+- 🗄️ **Banco de Dados**: Schema profissional em português
+- 🔒 **Segurança**: Row Level Security (RLS) no Supabase
 
 ## 🚀 Tecnologias Utilizadas
 
-- **React 18** com **TypeScript** - Interface moderna e type-safe
-- **Vite** - Build tool super rápido
-- **Tailwind CSS** - Estilização utilitária e responsiva
-- **Zustand** - Gerenciamento de estado simples e eficiente
-- **React Router** - Navegação SPA
-- **Lucide React** - Ícones modernos
-- **date-fns** - Manipulação de datas
+### Frontend
+- **Next.js 14** - Framework React com App Router
+- **TypeScript** - Tipagem estática
+- **Tailwind CSS** - Estilização utilitária
+- **Framer Motion** - Animações fluidas
+- **Radix UI** - Componentes acessíveis
+- **React Hook Form** - Gerenciamento de formulários
+- **React Hot Toast** - Notificações
 
-## ✨ Funcionalidades
+### Backend
+- **Supabase** - Backend-as-a-Service
+- **PostgreSQL** - Banco de dados
+- **Row Level Security** - Segurança de dados
+- **Auth** - Autenticação e autorização
 
-### 📊 Dashboard
-- Visão geral dos treinos da semana
-- Resumo nutricional do dia
-- Estatísticas de progresso
-- Controle de hidratação
+### PWA
+- **next-pwa** - Configuração PWA
+- **Service Worker** - Cache offline
+- **Manifest** - Instalação no dispositivo
 
-### 🏋️ Treinos
-- Criação e edição de treinos personalizados
-- Controle de séries, repetições e cargas
-- Histórico de treinos realizados
-- Sistema de templates de treino
+## 📋 Pré-requisitos
 
-### 📅 Agenda
-- Calendário visual dos treinos
-- Programação de treinos futuros
-- Visualização mensal e diária
-- Status de conclusão
+- Node.js 18+ 
+- npm ou yarn
+- Conta no Supabase
 
-### 🥗 Dieta
-- Registro detalhado de refeições
-- Controle de macronutrientes (proteína, carboidratos, gorduras)
-- Contador de calorias
-- Controle de hidratação
-- Metas nutricionais personalizáveis
+## 🛠️ Instalação
 
-### 📈 Progresso
-- Registro de peso e medidas corporais
-- Histórico de evolução física
-- Cálculo de % de gordura
-- Acompanhamento de circunferências
-- Espaço para observações
+1. **Clone o repositório**
+```bash
+git clone https://github.com/seu-usuario/site-academia.git
+cd site-academia
+```
 
-### ⚙️ Configurações
-- Perfil personalizado
-- Metas de treino e dieta
-- Backup e exportação de dados
-- Configurações de notificações (em desenvolvimento)
+2. **Instale as dependências**
+```bash
+npm install
+# ou
+yarn install
+```
 
-## 🎨 Design
+3. **Configure as variáveis de ambiente**
+```bash
+cp env.example .env.local
+```
 
-- **Design System** baseado em shadcn/ui
-- **Totalmente Responsivo** - funciona perfeitamente em desktop, tablet e mobile
-- **Dark/Light Mode** ready (configuração em CSS variables)
-- **Animações Suaves** com Tailwind CSS
-- **UX Moderno** com feedback visual e micro-interações
+4. **Configure o Supabase**
+   - Crie um projeto no [Supabase](https://supabase.com)
+   - Execute o script `database_schema.sql` no SQL Editor
+   - Copie a URL e chave anônima para o `.env.local`
 
-## 💾 Armazenamento
+5. **Execute o projeto**
+```bash
+npm run dev
+# ou
+yarn dev
+```
 
-- **Dados Locais** - Armazenamento seguro no localStorage do navegador
-- **Persistência Automática** - Seus dados são salvos automaticamente
-- **Backup/Restore** - Exporte seus dados para backup
-- **Zero Dependências Externas** - Funciona offline
+6. **Acesse a aplicação**
+```
+http://localhost:3000
+```
 
-## 🏃‍♂️ Como Executar
+## 🗄️ Configuração do Banco de Dados
 
-### Desenvolvimento Local
+### 1. Remover tabelas existentes (se houver)
+Execute o script `remove_existing_tables.sql` no Supabase SQL Editor.
 
-1. **Instalar dependências:**
-   ```bash
-   npm install
-   ```
+### 2. Criar o schema
+Execute o script `database_schema.sql` no Supabase SQL Editor.
 
-2. **Executar em modo desenvolvimento:**
-   ```bash
-   npm run dev
-   ```
+### 3. Configurar autenticação
+No Supabase Dashboard:
+- Vá para Authentication > Settings
+- Configure os providers desejados (Email, Google)
+- Defina as URLs de redirecionamento
 
-3. **Build para produção:**
-   ```bash
-   npm run build
-   ```
+## 📱 PWA - Progressive Web App
 
-### Deploy com Banco de Dados
+A aplicação é uma PWA completa com:
 
-Para hospedar com banco de dados na nuvem, siga o [Guia de Deploy](DEPLOY.md):
+- **Instalação**: Pode ser instalada no celular/desktop
+- **Offline**: Funciona sem internet (dados em cache)
+- **Notificações**: Push notifications (configurável)
+- **Responsivo**: Otimizado para todos os dispositivos
 
-1. **Configurar Supabase** (banco de dados gratuito)
-2. **Deploy no Vercel** (hospedagem gratuita)
-3. **Configurar variáveis de ambiente**
+### Instalação no Celular
+1. Acesse o site no navegador
+2. Toque no ícone "Instalar" na barra de endereços
+3. Confirme a instalação
 
-**Resultado**: Site online com dados salvos na nuvem! 🚀
-
-## 📱 Recursos Mobile
-
-- **PWA Ready** - Pode ser instalado como app
-- **Touch Friendly** - Interface otimizada para toque
-- **Responsive Design** - Adapta-se a qualquer tela
-- **Navegação Intuitiva** - Menu lateral colapsível
-
-## 🔧 Estrutura do Projeto
+## 🎨 Estrutura do Projeto
 
 ```
 src/
-├── components/          # Componentes reutilizáveis
-│   ├── layout/         # Layout e navegação
-│   └── ui/             # Componentes de interface
-├── pages/              # Páginas da aplicação
-├── store/              # Gerenciamento de estado (Zustand)
-├── types/              # Tipos TypeScript
-├── hooks/              # Custom hooks
-├── data/               # Dados de exemplo
-└── lib/                # Utilitários
+├── app/                    # App Router (Next.js 14)
+│   ├── auth/              # Páginas de autenticação
+│   ├── dashboard/         # Dashboard principal
+│   ├── globals.css        # Estilos globais
+│   └── layout.tsx         # Layout raiz
+├── components/            # Componentes React
+│   ├── ui/               # Componentes base (Button, Card, etc)
+│   ├── layout/           # Layout components (Header, Footer)
+│   ├── landing/          # Páginas de marketing
+│   └── providers.tsx     # Context providers
+├── lib/                  # Utilitários e configurações
+│   ├── supabase.ts       # Cliente Supabase
+│   └── utils.ts          # Funções utilitárias
+└── types/                # Definições TypeScript
 ```
 
-## 🎯 Próximas Funcionalidades
+## 🔧 Scripts Disponíveis
 
-- [ ] Notificações push
-- [ ] Gráficos de progresso
-- [ ] Compartilhamento de treinos
-- [ ] Sincronização em nuvem
-- [ ] Calculadora de macros
-- [ ] Timer de treino
-- [ ] Histórico de fotos de progresso
+```bash
+# Desenvolvimento
+npm run dev
+
+# Build de produção
+npm run build
+
+# Iniciar servidor de produção
+npm run start
+
+# Linting
+npm run lint
+
+# Verificação de tipos
+npm run type-check
+```
+
+## 🎯 Funcionalidades Principais
+
+### 🏋️ Gestão de Treinos
+- Criação de sessões de treino por dia da semana
+- Exercícios organizados por grupos musculares
+- Controle de séries, repetições e pesos
+- Histórico de treinos realizados
+
+### 🍎 Controle de Dieta
+- Registro de refeições e produtos
+- Cálculo automático de macronutrientes
+- Tipos de alimento categorizados
+- Acompanhamento de calorias
+
+### 📊 Dashboard
+- Visão geral do progresso
+- Gráficos e estatísticas
+- Metas e objetivos
+- Histórico de atividades
+
+## 🔒 Segurança
+
+- **Row Level Security (RLS)**: Usuários só acessam seus próprios dados
+- **Autenticação JWT**: Tokens seguros do Supabase
+- **Validação de dados**: Zod para validação de formulários
+- **HTTPS**: Conexões seguras em produção
+
+## 📱 Responsividade
+
+A aplicação é totalmente responsiva com breakpoints:
+- **Mobile**: < 768px
+- **Tablet**: 768px - 1024px
+- **Desktop**: > 1024px
+
+## 🚀 Deploy
+
+### Vercel (Recomendado)
+1. Conecte seu repositório ao Vercel
+2. Configure as variáveis de ambiente
+3. Deploy automático
+
+### Outras plataformas
+- Netlify
+- Railway
+- DigitalOcean
+
+## 🤝 Contribuição
+
+1. Fork o projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
 
 ## 📄 Licença
 
-Este projeto é de uso pessoal e educacional.
+Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
+
+## 📞 Suporte
+
+- Email: contato@academiafitness.com
+- Discord: [Servidor da Comunidade](https://discord.gg/academiafitness)
+- Issues: [GitHub Issues](https://github.com/seu-usuario/site-academia/issues)
+
+## 🙏 Agradecimentos
+
+- [Next.js](https://nextjs.org/) - Framework React
+- [Supabase](https://supabase.com/) - Backend-as-a-Service
+- [Tailwind CSS](https://tailwindcss.com/) - Framework CSS
+- [Radix UI](https://www.radix-ui.com/) - Componentes acessíveis
+- [Framer Motion](https://www.framer.com/motion/) - Animações
 
 ---
 
-**Desenvolvido com ❤️ para quem busca uma vida mais saudável e ativa!**
+Feito com ❤️ para a comunidade fitness brasileira
 
-## 🎮 Como Usar
 
-1. **Primeiro Acesso:** O app carrega com dados de exemplo para você explorar
-2. **Dashboard:** Veja um resumo do seu dia e semana
-3. **Treinos:** Crie seus treinos personalizados com exercícios e séries
-4. **Agenda:** Programe seus treinos no calendário
-5. **Dieta:** Registre suas refeições e acompanhe macros
-6. **Progresso:** Faça medições regulares para acompanhar evolução
-7. **Configurações:** Personalize metas e faça backup dos dados
 
-> **Dica:** Use a função de exportar dados nas configurações para fazer backup regular dos seus progressos!
