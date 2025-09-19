@@ -93,6 +93,25 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/icons/icon-16x16.png" />
+        <style>{`
+          .mobile-bottom-nav {
+            position: fixed !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            z-index: 9999 !important;
+            background-color: white !important;
+            border-top: 1px solid #e5e7eb !important;
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1) !important;
+            transform: translateZ(0) !important;
+            -webkit-transform: translateZ(0) !important;
+          }
+          @media (min-width: 1024px) {
+            .mobile-bottom-nav {
+              display: none !important;
+            }
+          }
+        `}</style>
       </head>
       <body className={`${inter.className} antialiased`}>
         <Providers>
