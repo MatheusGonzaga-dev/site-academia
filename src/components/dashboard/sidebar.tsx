@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Button } from '@/components/ui/button'
@@ -44,6 +44,15 @@ export function DashboardSidebar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
   const { user, signOut } = useAuth()
+
+  useEffect(() => {
+    const handleToggleMenu = () => {
+      setIsMobileMenuOpen(prev => !prev)
+    }
+
+    window.addEventListener('toggleMobileMenu', handleToggleMenu)
+    return () => window.removeEventListener('toggleMobileMenu', handleToggleMenu)
+  }, [])
 
   const handleSignOut = async () => {
     await signOut()
@@ -203,17 +212,6 @@ export function DashboardSidebar() {
         )}
       </AnimatePresence>
 
-      {/* Mobile Menu Button */}
-      <div className="lg:hidden fixed top-20 left-4 z-30">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => setIsMobileMenuOpen(true)}
-          className="bg-background border-border shadow-lg"
-        >
-          <Menu className="h-5 w-5" />
-        </Button>
-      </div>
     </>
   )
 }

@@ -11,7 +11,8 @@ import {
   User,
   Moon,
   Sun,
-  HelpCircle
+  HelpCircle,
+  Menu
 } from 'lucide-react'
 import { useAuth } from '@/components/providers'
 import { motion } from 'framer-motion'
@@ -82,6 +83,20 @@ export function DashboardHeader() {
 
         {/* Right side */}
         <div className="flex items-center space-x-2 sm:space-x-4">
+          {/* Mobile Menu Button - apenas no mobile */}
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => {
+              // Função será passada via props ou context
+              const event = new CustomEvent('toggleMobileMenu')
+              window.dispatchEvent(event)
+            }}
+            className="lg:hidden"
+          >
+            <Menu className="h-5 w-5" />
+          </Button>
+
           {/* Dark mode toggle - sempre visível */}
           <Button
             variant="ghost"
