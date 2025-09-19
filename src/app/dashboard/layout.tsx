@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 import { LoadingPage } from '@/components/ui/loading-spinner'
 import { DashboardSidebar } from '@/components/dashboard/sidebar'
 import { DashboardHeader } from '@/components/dashboard/header'
-import { BottomNav } from '@/components/dashboard/bottom-nav'
+import { BottomNavFixed } from '@/components/dashboard/bottom-nav-fixed'
 
 export default function DashboardLayout({
   children,
@@ -31,17 +31,17 @@ export default function DashboardLayout({
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground relative">
       <DashboardSidebar />
       <div className="lg:pl-64">
         <DashboardHeader />
-        <main className="py-6 pb-24 lg:pb-6">
+        <main className="py-6 pb-20 lg:pb-6">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             {children}
           </div>
         </main>
       </div>
-      <BottomNav />
+      <BottomNavFixed />
     </div>
   )
 }
