@@ -5,7 +5,7 @@ import { Features } from '@/components/landing/features'
 import { Stats } from '@/components/landing/stats'
 import { Testimonials } from '@/components/landing/testimonials'
 import { CTA } from '@/components/landing/cta'
-import { Header } from '@/components/layout/header'
+import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/footer'
 import { LoadingSpinner } from '@/components/ui/loading-spinner'
 
