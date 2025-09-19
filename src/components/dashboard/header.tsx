@@ -59,8 +59,8 @@ export function DashboardHeader() {
   return (
     <header className="sticky top-0 z-40 bg-background border-b border-border backdrop-blur-sm">
       <div className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Search */}
-        <div className="flex-1 max-w-lg">
+        {/* Search - apenas no desktop */}
+        <div className="flex-1 max-w-lg hidden sm:block">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400 dark:text-gray-500" />
             <Input
@@ -73,15 +73,21 @@ export function DashboardHeader() {
           </div>
         </div>
 
+        {/* Logo no mobile */}
+        <div className="flex-1 sm:hidden">
+          <h1 className="text-lg font-bold text-gray-900 dark:text-gray-100">
+            Academia Fitness
+          </h1>
+        </div>
+
         {/* Right side */}
-        <div className="flex items-center space-x-4">
-          {/* Dark mode toggle */}
+        <div className="flex items-center space-x-2 sm:space-x-4">
+          {/* Dark mode toggle - sempre visível */}
           <Button
             variant="ghost"
             size="sm"
             onClick={toggleTheme}
             aria-label={isDarkMode ? 'Ativar tema claro' : 'Ativar tema escuro'}
-            className="hidden sm:flex"
           >
             {isDarkMode ? (
               <Sun className="h-4 w-4" />
@@ -90,7 +96,7 @@ export function DashboardHeader() {
             )}
           </Button>
 
-          {/* Help */}
+          {/* Help - apenas no desktop */}
           <Button variant="ghost" size="sm" className="hidden sm:flex">
             <HelpCircle className="h-4 w-4" />
           </Button>
@@ -133,19 +139,7 @@ export function DashboardHeader() {
         </div>
       </div>
 
-      {/* Mobile search */}
-      <div className="sm:hidden px-4 pb-4">
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400 dark:text-gray-500" />
-          <Input
-            type="search"
-            placeholder="Buscar..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10 pr-4"
-          />
-        </div>
-      </div>
+      {/* Mobile search - removido */}
     </header>
   )
 }

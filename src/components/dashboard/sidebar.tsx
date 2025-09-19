@@ -204,7 +204,7 @@ export function DashboardSidebar() {
       </AnimatePresence>
 
       {/* Mobile Menu Button */}
-      <div className="lg:hidden fixed top-4 left-4 z-30">
+      <div className="lg:hidden fixed top-20 left-4 z-30">
         <Button
           variant="outline"
           size="sm"
